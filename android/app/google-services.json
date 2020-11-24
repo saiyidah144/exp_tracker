@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "5810854099",
+    "firebase_url": "https://exptracker-bf557.firebaseio.com",
+    "project_id": "exptracker-bf557",
+    "storage_bucket": "exptracker-bf557.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5810854099:android:74165604dd038a91b71c26",
+        "android_client_info": {
+          "package_name": "com.example.exp_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5810854099-84rc4ml9o6qicpk4pimnfhi5qmouq60b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtC-pXGyWrdqKFV4PYnUMfpHG9XcRAQp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5810854099-84rc4ml9o6qicpk4pimnfhi5qmouq60b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
