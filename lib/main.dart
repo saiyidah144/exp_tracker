@@ -4,19 +4,23 @@ import 'package:flutter/material.dart';
 import 'auth_service.dart';
 import 'providerWidget.dart';
 import 'navigation_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final primaryColor = const Color(0xFFCE93D8);
   @override
   Widget build(BuildContext context) {
     return Provider(
         auth: AuthService(),
+        db: Firestore.instance,
     child: MaterialApp(
     title: "EXPTracker",
+       // color: primaryColor,
     theme: ThemeData(
-    primarySwatch: Colors.amber,
+      backgroundColor: primaryColor,
     ),
     home: HomeController(),
     routes: <String, WidgetBuilder>{

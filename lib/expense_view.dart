@@ -1,4 +1,5 @@
-import 'package:exp_tracker/Category.dart';
+import 'package:exp_tracker/UserProfile.dart';
+import 'package:exp_tracker/money_text_field.dart';
 import 'package:exp_tracker/providerWidget.dart';
 import 'package:exp_tracker/summary_view.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_range_picker/date_range_picker.dart' as DateRangePicker;
 import 'dart:async';
 import 'package:intl/intl.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class NewExpenseView extends StatefulWidget {
   final Expense expense;
@@ -18,24 +20,13 @@ class NewExpenseView extends StatefulWidget {
 }
 
 class _NewExpenseViewState extends State<NewExpenseView> {
+  final primaryColor = const Color(0xFFCE93D8);
   Expense expense;
   final db = Firestore.instance;
   DateTime _dateTime = DateTime.now();
-  var _expenseTotal = 0;
+  var _expenseTotal = 0.0;
   TextEditingController _expenseController = new TextEditingController();
 
-Future displayDateRangePicker (BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-        context: context, 
-        initialDate: _dateTime,
-        firstDate: new DateTime(2015),
-        lastDate: new DateTime(2026));
-    if (picked !=null && picked != _dateTime ){
-      setState(() {
-        _dateTime = picked;
-      });
-    }
-}
 
 @override
 void initState(){
@@ -45,7 +36,7 @@ void initState(){
 
 _setExpenseTotal(){
   setState(() {
-    _expenseTotal = int.parse (_expenseController.text);
+    _expenseTotal = ((_expenseController.text == "") ? 0.0 : double.parse(_expenseController.text)) ;
   });
 }
 
@@ -53,24 +44,28 @@ List<Widget> setExpenseFields (_budgetController) {
   List<Widget> fields = [];
 
 
-  fields.add(Padding(padding: const EdgeInsets.only(top: 12.0),
-  child: Text("Enter Amount"),
+  fields.add(Center(
+    child: Padding(padding: const EdgeInsets.only(top: 12.0),
+    child: Text("Enter Amount"),
+    ),
   ));
-  fields.add(generateTextField (_expenseController, "Amount spending"));
+  fields.add(MoneyTextField (controller: _expenseController, helperText: "Amount spending"));
 
-  fields.add(RaisedButton(
+  /*fields.add(RaisedButton(
       child: Text("Select Date"),
       onPressed: () async {
   await displayDateRangePicker(context);
   },),);
-
-  fields.add(Text("Date : ${DateFormat('MM/dd/yyyy').format(_dateTime).toString()}"),);
+*/
+  fields.add(Center
+    (child: Text(" Date : ${DateFormat('dd/MMMM/yyyy').format(_dateTime).toString()}")),
+  );
 
   fields.add(FlatButton(
     child: Text("Continue",
     style: TextStyle(fontSize: 16, color: Colors.orange),),
       onPressed: () async {
-      widget.expense.amount = _expenseTotal.toDouble();
+      widget.expense.amount = _expenseTotal;
       widget.expense.date = _dateTime;
       Navigator.push(context, MaterialPageRoute(builder: (context) => NewExpenseSummaryView(expense: widget.expense,)),
       );
@@ -83,13 +78,14 @@ List<Widget> setExpenseFields (_budgetController) {
 
 
 
-_expenseController.text = (_expenseController.text) == "0" ? "" : _expenseTotal.toString();
+_expenseController.text = (_expenseController.text) == "0" ? "" : _expenseTotal.toStringAsFixed(0);
 _expenseController.selection = TextSelection.collapsed(offset: _expenseController.text.length);
 
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Expense'),
+        backgroundColor: primaryColor,
       ),
       body: ListView(
         children: setExpenseFields(_expenseController),
@@ -111,9 +107,9 @@ _expenseController.selection = TextSelection.collapsed(offset: _expenseControlle
         decoration: InputDecoration(
           helperText: helperText,
         ),
-        keyboardType: TextInputType.numberWithOptions(decimal: false),
+        keyboardType: TextInputType.number,
         inputFormatters: [
-          WhitelistingTextInputFormatter.digitsOnly,
+          ThousandsFormatter(allowFraction: true)
         ],
         autofocus: true,
       ),

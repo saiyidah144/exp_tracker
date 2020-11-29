@@ -84,11 +84,11 @@ class NameValidator {
   }
 }
 class EmailValidator {
-  static String validate(String value) {
+ static String validate(String value) {
     if(value.isEmpty) {
-      return "Email can't be empty";
+     return "Email can't be empty";
     }
-    return null;
+   return null;
   }
 }
 class PasswordValidator {
@@ -99,3 +99,4 @@ class PasswordValidator {
     return null;
   }
 }
+

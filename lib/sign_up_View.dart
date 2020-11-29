@@ -5,7 +5,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 
-final primaryColor = const Color(0xFFFFCC80);
+
+final primaryColor = const Color(0xFFCE93D8);
 
 enum AuthFormType { signIn, signUp,  reset, anonymous,convert}
 

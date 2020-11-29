@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:exp_tracker/expense_view.dart';
 import 'history_view.dart';
 import 'pages.dart';
-import 'auth_service.dart';
-import 'providerWidget.dart';
 import 'package:exp_tracker/profile_view.dart';
 
 
@@ -18,7 +16,7 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home>{
-
+  final primaryColor = const Color(0xFFCE93D8);
   int _currentIndex=0;
   final List<Widget> _children = [
     HomeView(),
@@ -29,38 +27,24 @@ class _HomeState extends State<Home>{
 
   @override
   Widget build(BuildContext context) {
-final newExpense = new Expense(null, null, null,);
+final newExpense = new Expense(null,null,null);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("EXPTracker"),
+        backgroundColor: primaryColor,
         actions: <Widget>[
           IconButton(icon: Icon(Icons.add),
+
               onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => NewExpenseView(expense : newExpense, )),);
               }, ),
-   /*   IconButton(
-        icon: Icon(Icons.undo),
-        onPressed: () async {
-          try {
-            AuthService auth = Provider.of(context).auth;
-            await auth.signOut();
-            print("Signed Out!");
-          } catch (e) {
-            print (e);
-          }
-        },
-          ),
-      IconButton(
-        icon: Icon(Icons.account_circle),
-        onPressed: () {
-          Navigator.of(context).pushNamed('/convertUser');
-          },
-      ), */
         ],
       ),
       body: _children[_currentIndex],
       floatingActionButton: FloatingActionButton (
       child: Icon(Icons.card_giftcard),
+        backgroundColor: primaryColor,
         onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => RewardView()));
         },
@@ -73,22 +57,22 @@ final newExpense = new Expense(null, null, null,);
             BottomNavigationBarItem(
               icon: new Icon(Icons.home),
               title: new Text("Home"),
-              backgroundColor: Colors.amber,
+              backgroundColor: primaryColor,
             ),
             BottomNavigationBarItem(
               icon: new Icon(Icons.history),
               title: new Text("History"),
-              backgroundColor: Colors.amber,
+              backgroundColor: primaryColor,
             ),
             BottomNavigationBarItem(
               icon: new Icon(Icons.equalizer),
               title: new Text("Statistics"),
-              backgroundColor: Colors.amber,
+              backgroundColor: primaryColor,
             ),
             BottomNavigationBarItem(
               icon: new Icon(Icons.account_circle),
               title: new Text("Account"),
-              backgroundColor: Colors.amber,
+              backgroundColor: primaryColor,
             ),
           ]
       ),

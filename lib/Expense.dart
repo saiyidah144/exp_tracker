@@ -8,21 +8,26 @@ class Expense {
   double amount;
   DateTime date;
   String type;
+  String documentId;
+  DateTime updDate;
 
 
-  Expense(this.amount, this.date, this.type);
+  Expense(this.amount, this.date, this.type, );
 
   Map<String, dynamic> toJson() =>
       {
         'amount': amount,
         'date': date,
-        'type' : type
+        'type' : type,
+        'updDate' : updDate,
       };
 
 Expense.fromSnapshot (DocumentSnapshot snapshot):
     amount = snapshot['amount'],
     date = snapshot['date'].toDate(),
-    type = snapshot['type'];
+    type = snapshot['type'],
+      documentId = snapshot.documentID;
+
 
   Map<String, Icon> types() =>
       {
@@ -36,4 +41,5 @@ Expense.fromSnapshot (DocumentSnapshot snapshot):
         "Discretionary_expenses": Icon(Icons.shopping_cart, size: 50),
         "other": Icon(Icons.directions, size: 50),
       };
+
 }
