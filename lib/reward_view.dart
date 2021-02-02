@@ -18,7 +18,16 @@ class RewardView extends StatelessWidget {
   }
 }
 
-class RewardWidget extends StatelessWidget {
+class RewardWidget extends StatefulWidget {
+  @override
+  _RewardWidgetState createState() => _RewardWidgetState();
+}
+
+class _RewardWidgetState extends State<RewardWidget> {
+  bool _isRewardOn = false;
+  Icon RewardOff = Icon(Icons.lock, size: 80,);
+  Icon RewardOn = Icon(Icons.lock_open, size: 80,);
+
   @override
   Widget build(BuildContext context) {
     return  new Scaffold(
@@ -38,14 +47,15 @@ class RewardWidget extends StatelessWidget {
           Container(
              child: Padding(
                padding: const EdgeInsets.only(top: 5.0, bottom: 100.0, right: 4.0),
-               child: Row(
-                 children: <Widget>[
-                   Lock(),
-                   Lock(),
-                   Lock(),
-                   Lock(),
-                   Lock(),
-                 ],
+               child: GestureDetector(
+                   child: Container(
+                       child: _isRewardOn ? RewardOn : RewardOff),
+                   onTap: () {
+                     setState(() {
+                       _isRewardOn = !_isRewardOn;
+                     });
+                   },
+
                ),
              ),
       ),
@@ -62,22 +72,8 @@ class RewardWidget extends StatelessWidget {
 
   }
 
+
 }
 
-class Lock extends StatelessWidget {
 
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 4.0, bottom: 100.0, left: 20.0),
-      child: IconButton(
-        icon: Icon(Icons.lock, size: 80,),
-        onPressed: () {
-          Icon(Icons.lock_open);
-        },
-      ),
-
-    );
-  }
-}
