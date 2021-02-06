@@ -1,13 +1,9 @@
-import 'package:exp_tracker/UserProfile.dart';
 import 'package:exp_tracker/money_text_field.dart';
-import 'package:exp_tracker/providerWidget.dart';
 import 'package:exp_tracker/summary_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Expense.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:date_range_picker/date_range_picker.dart' as DateRangePicker;
-import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 

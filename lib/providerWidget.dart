@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -15,5 +13,6 @@ class Provider extends InheritedWidget {
   }
 
   static Provider of(BuildContext context) =>
+      // ignore: deprecated_member_use
       (context.inheritFromWidgetOfExactType(Provider) as Provider);
 }

@@ -1,4 +1,3 @@
-import 'package:exp_tracker/UserProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:exp_tracker/Expense.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
