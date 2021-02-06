@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:exp_tracker/Expense.dart';
 
 class RewardView extends StatelessWidget {
+
   final primaryColor = const Color(0xFFCE93D8);
   @override
   Widget build(BuildContext context) {
@@ -24,12 +26,13 @@ class RewardWidget extends StatefulWidget {
 }
 
 class _RewardWidgetState extends State<RewardWidget> {
+
   bool _isRewardOn = false;
   Icon RewardOff = Icon(Icons.lock, size: 80,);
   Icon RewardOn = Icon(Icons.lock_open, size: 80,);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context ) {
     return  new Scaffold(
       body: Column(
         children: <Widget>[
@@ -52,7 +55,12 @@ class _RewardWidgetState extends State<RewardWidget> {
                        child: _isRewardOn ? RewardOn : RewardOff),
                    onTap: () {
                      setState(() {
-                       _isRewardOn = !_isRewardOn;
+                    //   if (Expense.fromSnapshot(snapshot).amount != null ) {
+                         _isRewardOn = !_isRewardOn;
+                     //  }
+                     //  else {
+                     //    _isRewardOn = _isRewardOn;
+                       //}
                      });
                    },
 
