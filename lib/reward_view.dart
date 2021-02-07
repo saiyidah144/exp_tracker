@@ -18,10 +18,13 @@ class _RewardViewState extends State<RewardView> {
   final primaryColor = const Color(0xFFCE93D8);
   final db = Firestore.instance;
   Expense expense;
-
+  DateTime date1 = DateTime.now();
+  DateTime date2 = DateTime(2021,1,30);
   bool _isRewardOn = false;
   Icon rewardOff = Icon(Icons.lock, size: 80,);
   Icon rewardOn = Icon(Icons.lock_open, size: 80,);
+  external int get day;
+
 
   @override
   Widget build(BuildContext context)  {
@@ -53,16 +56,32 @@ class _RewardViewState extends State<RewardView> {
                     onTap: () async {
                           final uid = await Provider.of(context).auth.getCurrentUID();
                           final user =  db.collection("userData").document(uid).collection("expenses").reference();
-                         // final dates = db.collection("userData").document(uid).collection("expenses").where("date").reference();
+                          final dates = db.collection("userData").document(uid).collection("expenses").where("date").reference();
                         setState(() {
+                          while ( date1.day != 15 ) {
                             if (  user != null ) {
-                                    _isRewardOn = !_isRewardOn;
-                                      showAlertDialog(context);
-
+                              // ignore: unrelated_type_equality_checks
+                              if ( dates == day ) {
+                                _isRewardOn = !_isRewardOn;
+                                // ignore: unrelated_type_equality_checks
+                                if (rewardOff == 5){
+                                  showAlertDialog(context);
                                 }
-                            else {
-                                    _isRewardOn = _isRewardOn;
+                                else{
+                                  Text("Please Complete 5 lock");
+                                }
+                              }
+                              else{
+                                Text("Please Complete 5 lock");
+                              }
                             }
+                            else {
+                              _isRewardOn = _isRewardOn;
+
+                            }
+                          }
+
+
                           });
                     },
               ),
@@ -101,7 +120,11 @@ showAlertDialog (BuildContext context){
   );
 }
 
+
 }
+
+
+
 
 
 
