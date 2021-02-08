@@ -1,8 +1,8 @@
-import 'package:exp_tracker/providerWidget.dart';
+import 'package:exp_tracker/models/providerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-import 'package:exp_tracker/Expense.dart';
+import 'package:exp_tracker/models/Expense.dart';
 
 
 class HistoryPage extends StatelessWidget {

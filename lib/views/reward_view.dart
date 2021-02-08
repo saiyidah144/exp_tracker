@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:exp_tracker/Expense.dart';
+import 'package:exp_tracker/models/Expense.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:exp_tracker/providerWidget.dart';
+import 'package:exp_tracker/models/providerWidget.dart';
 
 
 class RewardView extends StatefulWidget {

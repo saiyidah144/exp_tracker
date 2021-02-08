@@ -1,10 +1,9 @@
-import 'package:exp_tracker/Expense.dart';
-import 'package:exp_tracker/reward_view.dart';
+import 'package:exp_tracker/views/reward_view.dart';
+import 'package:exp_tracker/views/statistic_view.dart';
 import 'package:flutter/material.dart';
-import 'package:exp_tracker/expense_view.dart';
 import 'history_view.dart';
-import 'pages.dart';
-import 'package:exp_tracker/profile_view.dart';
+import 'package:exp_tracker/views/profile_view.dart';
+import 'home_view.dart';
 
 
 
@@ -27,19 +26,19 @@ class _HomeState extends State<Home>{
 
   @override
   Widget build(BuildContext context) {
-final newExpense = new Expense(null,null,null);
+
 
     return Scaffold(
       appBar: AppBar(
         title: Text("EXPTracker"),
         backgroundColor: primaryColor,
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.add),
+      //  actions: <Widget>[
+      //    IconButton(icon: Icon(Icons.add),
 
-              onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => NewExpenseView(expense : newExpense, )),);
-              }, ),
-        ],
+      //        onPressed: (){
+      //      Navigator.push(context, MaterialPageRoute(builder: (context) => NewExpenseView(expense : newExpense, )),);
+      //        }, ),
+      //  ],
       ),
       body: _children[_currentIndex],
       floatingActionButton: FloatingActionButton (

@@ -1,6 +1,6 @@
-import 'package:exp_tracker/UserProfile.dart';
+import 'package:exp_tracker/models/UserProfile.dart';
 import 'package:flutter/material.dart';
-import 'providerWidget.dart';
+import '../models/providerWidget.dart';
 
 
 

@@ -1,9 +1,9 @@
-import 'package:exp_tracker/First_view.dart';
-import 'package:exp_tracker/sign_up_View.dart';
+import 'package:exp_tracker/views/First_view.dart';
+import 'package:exp_tracker/views/sign_up_View.dart';
 import 'package:flutter/material.dart';
-import 'auth_service.dart';
-import 'providerWidget.dart';
-import 'navigation_view.dart';
+import 'services/auth_service.dart';
+import 'models/providerWidget.dart';
+import 'views/navigation_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
