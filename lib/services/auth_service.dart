@@ -3,11 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  Stream<String> get onAuthStateChanged =>
-      _firebaseAuth.onAuthStateChanged.map(
+  Stream<String> get onAuthStateChanged => _firebaseAuth.onAuthStateChanged.map(
         (FirebaseUser user) => user?.uid,
   );
-
+// GET UID
+  //Future<String> getCurrentUID() async {
+  // return (await _firebaseAuth.currentUser()).uid;
+  //}
+  // GET CURRENT USER
+  Future getCurrentUser() async {
+    return await _firebaseAuth.currentUser();
+  }
   // Email & Password Sign Up
   Future<String> createUserWithEmailAndPassword(
       String email, String password, String name) async {
@@ -17,14 +23,11 @@ class AuthService {
     );
 
     // Update the username
-    await updateUserName(name, currentUser);
-    return currentUser.uid;
-  }
-  Future updateUserName(String name, FirebaseUser currentUser) async {
     var userUpdateInfo = UserUpdateInfo();
     userUpdateInfo.displayName = name;
     await currentUser.updateProfile(userUpdateInfo);
     await currentUser.reload();
+    return currentUser.uid;
   }
 
   // Email & Password Sign In
@@ -38,33 +41,6 @@ class AuthService {
   // Sign Out
   signOut() {
     return _firebaseAuth.signOut();
-  }
-// Reset Password
-  Future sendPasswordResetEmail(String email) async {
-    return _firebaseAuth.sendPasswordResetEmail(email: email);
-  }
-
-  Future singInAnonymously() {
-    return _firebaseAuth.signInAnonymously();
-  }
-
-
-  Future convertUserWithEmail(String email, String password, String name) async {
-    final currentUser = await _firebaseAuth.currentUser();
-
-    final credential = EmailAuthProvider.getCredential(email: email, password: password);
-    await currentUser.linkWithCredential(credential);
-    await updateUserName(name, currentUser);
-  }
-
-
-  Future<String> getCurrentUID() async {
-    return (await _firebaseAuth.currentUser()).uid;
-  }
-
-  // GET CURRENT USER
-  Future getCurrentUser() async {
-    return await _firebaseAuth.currentUser();
   }
 
 }
@@ -83,14 +59,16 @@ class NameValidator {
     return null;
   }
 }
+
 class EmailValidator {
- static String validate(String value) {
+  static String validate(String value) {
     if(value.isEmpty) {
-     return "Email can't be empty";
+      return "Email can't be empty";
     }
-   return null;
+    return null;
   }
 }
+
 class PasswordValidator {
   static String validate(String value) {
     if(value.isEmpty) {
@@ -99,4 +77,3 @@ class PasswordValidator {
     return null;
   }
 }
-

@@ -1,26 +1,28 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Category {
-   double budget;
-   double expenses;
-   String date;
-  String documentId;
+  final double budget;
+  final double expenses;
+  final String type;
+  final String id;
+  final DateTime date;
 
-  Category(this.budget, this.expenses,this.date);
 
-  Map<String, dynamic> toJson() =>
-      {
-        "Budget" : budget,
-        "Expenses":expenses,
-        "Date":date,
-      };
+  Category({this.budget, this.expenses, this.id,this.date,this.type});
 
+  Map<String, dynamic> toMap() {
+    return {
+      "Budget" : budget,
+      "Expenses":expenses,
+      "Date":date,
+      "Type" : type,
+
+    };
+  }
   Category.fromSnapshot (DocumentSnapshot snapshot):
-        budget = snapshot['budget'],
-        date = snapshot['date'].toDate(),
-        expenses = snapshot['expenses'],
-        documentId = snapshot.documentID;
-
-
+        budget = snapshot['Budget'],
+        date = snapshot['Date'].toDate(),
+        expenses = snapshot['Expenses'],
+        type = snapshot['Type'],
+        id = snapshot.documentID;
 }

@@ -23,16 +23,16 @@ class FirstView extends StatelessWidget {
                 SizedBox(height: _height * 0.10),
                 Text(
                   "Welcome",
-                  style: TextStyle(fontSize: 44, color: Colors.black),
+                  style: TextStyle(fontSize: 44, color: Colors.white),
                 ),
                 SizedBox(height: _height * 0.10),
                 AutoSizeText(
-                  "Let’s start tracking your expenses",
+                  "Let’s start planning your next expenses",
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 40,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 SizedBox(height: _height * 0.15),
@@ -48,7 +48,7 @@ class FirstView extends StatelessWidget {
                       style: TextStyle(
                         color: primaryColor,
                         fontSize: 28,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                   ),
@@ -56,13 +56,13 @@ class FirstView extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => CustomDialog(
-                        title: "Would you like to create a free account?",
+                        title: "Would you like to create a account?",
                         description:
-                        "With an account, your data will be securely saved, allowing you to access it from multiple devices.",
+                        "With an account, your data will be securely saved.",
                         primaryButtonText: "Create My Account",
                         primaryButtonRoute: "/signUp",
                         secondaryButtonText: "Maybe Later",
-                        secondaryButtonRoute: "/anonymousSignIn",
+                        secondaryButtonRoute: "/home",
                       ),
                     );
                   },
@@ -71,7 +71,7 @@ class FirstView extends StatelessWidget {
                 FlatButton(
                   child: Text(
                     "Sign In",
-                    style: TextStyle(color: Colors.black, fontSize: 25),
+                    style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                   onPressed: () {
                     Navigator.of(context).pushReplacementNamed('/signIn');

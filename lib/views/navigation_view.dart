@@ -18,7 +18,7 @@ class _HomeState extends State<Home>{
   final primaryColor = const Color(0xFFCE93D8);
   int _currentIndex=0;
   final List<Widget> _children = [
-    HomeView(),
+    HomePage(),
     HistoryPage(),
     StatisticsPage(),
     AccountPage(),

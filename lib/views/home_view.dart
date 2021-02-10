@@ -1,3 +1,4 @@
+
 import 'package:exp_tracker/views/adhoc_view.dart';
 import 'package:exp_tracker/views/discretionary_view.dart';
 import 'package:exp_tracker/views/food_view.dart';
@@ -11,7 +12,7 @@ import 'package:exp_tracker/views/utilities_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatelessWidget {
+class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -184,3 +185,6 @@ class HomeView extends StatelessWidget {
           ],),),);
   }
 }
+
+
+

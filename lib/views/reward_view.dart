@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:exp_tracker/models/Expense.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:exp_tracker/models/providerWidget.dart';
+
 
 
 class RewardView extends StatefulWidget {
@@ -53,7 +53,7 @@ class _RewardViewState extends State<RewardView> {
               child: GestureDetector(
                   child: Container(
                       child: _isRewardOn ? rewardOn : rewardOff),
-                    onTap: () async {
+                  /*  onTap: () async {
                           final uid = await Provider.of(context).auth.getCurrentUID();
                           final user =  db.collection("userData").document(uid).collection("expenses").reference();
                           final dates = db.collection("userData").document(uid).collection("expenses").where("date").reference();
@@ -82,8 +82,9 @@ class _RewardViewState extends State<RewardView> {
                           }
 
 
-                          });
-                    },
+                          }
+                          );
+                    },*/
               ),
             ),
           ),
