@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
+//TO VIEW THE SOCIAL PARTICIPATION PAGE TO ADD EXPENSE, BUDGET AND DATE
 class  SocialParticipationRoute extends StatefulWidget {
   final Category social;
 

@@ -1,11 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exp_tracker/models/UserProfile.dart';
 import 'package:exp_tracker/views/add_profile.dart';
+import 'package:exp_tracker/views/detailed_profile_view.dart';
 import 'package:flutter/material.dart';
 import '../models/providerWidget.dart';
 
 
-
+// TO VIEW THE USER PROFILE PAGE, AND ADD/UPDATE USER DATA, AND SIGN OUT
 class AccountPage extends StatefulWidget{
   @override
   _AccountPageState createState() => _AccountPageState();
@@ -34,18 +34,6 @@ class _AccountPageState extends State<AccountPage> {
                     }
                   },
                 ),
-                Expanded(
-                  child: StreamBuilder(
-                      stream: Firestore.instance.collection('userData').snapshots(),
-                      builder: (context, snapshot) {
-                        if(!snapshot.hasData ) return const Text("Loading...");
-                        return new ListView.builder(
-                            itemCount: snapshot.data.documents.length,
-                            itemBuilder: (BuildContext context, int index) =>
-                               buildUserInformationCard(context, snapshot.data.documents[index]));
-                      }
-                  ),
-                ),
               ],
             ),
           ),
@@ -54,78 +42,7 @@ class _AccountPageState extends State<AccountPage> {
 
     );
   }
-Widget buildUserInformationCard (BuildContext context, DocumentSnapshot document){
-  final userProfile = UserProfile.fromSnapshot(document);
-  return Container(
-    child: Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
-          child: Row(children: <Widget>[
-            Text(userProfile.name,  style: new TextStyle(fontSize: 15.0),),
-            Spacer(),
-          ]),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
-          child: Row(children: <Widget>[
-            Text(userProfile.age.toString(),  style: new TextStyle(fontSize: 15.0),),
-            Spacer(),
-          ]),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
-          child: Row(children: <Widget>[
-            Text(userProfile.gender,  style: new TextStyle(fontSize: 15.0),),
-            Spacer(),
-          ]),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
-          child: Row(children: <Widget>[
-            Text(userProfile.ethnic,  style: new TextStyle(fontSize: 15.0),),
-            Spacer(),
-          ]),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
-          child: Row(children: <Widget>[
-            Text(userProfile.phoneNo,  style: new TextStyle(fontSize: 15.0),),
-            Spacer(),
-          ]),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
-          child: Row(children: <Widget>[
-            Text(userProfile.location,  style: new TextStyle(fontSize: 15.0),),
-            Spacer(),
-          ]),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
-          child: Row(children: <Widget>[
-            Text(userProfile.houseCategory,  style: new TextStyle(fontSize: 15.0),),
-            Spacer(),
-          ]),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
-          child: Row(children: <Widget>[
-            Text(userProfile.shortTarget.toString(),  style: new TextStyle(fontSize: 15.0),),
-            Spacer(),
-          ]),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
-          child: Row(children: <Widget>[
-            Text(userProfile.longTarget.toString(),  style: new TextStyle(fontSize: 15.0),),
-            Spacer(),
-          ]),
-        ),
-      ],
-    ),
-  );
-}
+
   Widget displayUserInformation(context, snapshot){
     final authData = snapshot.data;
 
@@ -133,33 +50,49 @@ Widget buildUserInformationCard (BuildContext context, DocumentSnapshot document
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Card(
+        color: Colors.deepPurple[50],
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(top: 4.0,bottom: 8.0),
                 child: Text(
-                  "Username: ${authData.displayName ?? 'Anonymous'}",
+                  "USERNAME : ${authData.displayName ?? 'Anonymous'}",
                   style: TextStyle(fontSize: 20),),
               ),
 
               Padding(
                 padding: const EdgeInsets.only(top: 5.0,bottom: 9.0),
-                child: Text("Email: ${authData.email ?? 'Anonymous'}",
+                child: Text(" EMAIL : ${authData.email ?? 'Anonymous'}",
                   style: TextStyle(fontSize: 20),),
               ),
 
 
               showSignOut(context, authData.isAnonymous),
               RaisedButton(
-                child: Text("Update Information"),
+                padding: const EdgeInsets.only(right: 25.0, left: 25.0, top: 8.0, bottom: 8.0),
+                child: Text("A D D  U S E R  I N F O R M A T I O N"),
+                textColor: Colors.white,
+                color:  Colors.deepPurple[400],
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => AddProfileInformation()),
                   );
                 },
-              )
+              ),
+              Text("NOTE : ABOVE IS FOR FIRST TIME ADD USER INFORMATION ONLY ", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 10.0),textAlign: TextAlign.center,),
+              RaisedButton(
+                  padding: const EdgeInsets.only(right: 25.0, left: 25.0, top: 8.0, bottom: 8.0),
+                  child: Text("V I E W  D E T A I L E D  I N F O R M A T I O N"),
+                  textColor: Colors.white,
+                  color: Colors.deepPurple[700],
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DetailedProfileView()),
+                    );
+                  })
             ],
           ),
       ),
@@ -178,7 +111,10 @@ Widget buildUserInformationCard (BuildContext context, DocumentSnapshot document
       );
     } else {
       return RaisedButton(
-        child: Text("Sign Out"),
+        padding: const EdgeInsets.only(right: 25.0, left: 25.0, top: 8.0, bottom: 8.0),
+        child: Text("S I G N   O U T"),
+        textColor: Colors.white,
+        color: Colors.red[500],
         onPressed: () async {
           try {
             await Provider.of(context).auth.signOut();

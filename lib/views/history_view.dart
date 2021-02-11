@@ -6,15 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 
-class Categories {
-  double budget;
-  double expenses;
-  String date;
-  String type;
-
-  Categories(this.budget, this.expenses,this.date,this.type);
-}
-
+//TO VIEW THE CATEGORY THAT WE HAVE ADDED IN THE DATA : HISTORY PAGE
 class HistoryPage extends StatelessWidget {
   final doc = Firestore.instance;
   final Category category;
@@ -67,18 +59,6 @@ class HistoryPage extends StatelessWidget {
           ),
           ),
 
-        /*  Column(
-                  children: <Widget>[
-                    Text(category.type),
-                    Text("New Expenses"),
-                    TextField(controller: _expenseController,),
-                    Text("New Budget"),
-                    TextField(controller: _budgetController,),
-                    Text("Date"),
-                    TextField(controller: _dateController,),
-
-                  ],
-                ), */
 
           actions: <Widget>[
             FlatButton(
@@ -94,7 +74,6 @@ class HistoryPage extends StatelessWidget {
                   await FirestoreService().updateData(categories);
                   Navigator.pop(context);
 
-            //   await updateExpense(context);
                 }),
             
           ],
@@ -135,39 +114,27 @@ class HistoryPage extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    TextEditingController _typeController = new TextEditingController();
-    return  Column(
-      children: <Widget>[
-        Container(
-          child: Card(
-            child: TextField(
-              controller: _typeController,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
+    return  Container(
+      color: Colors.deepPurple[50],
+      child: Column(
+        children: <Widget>[
+          Container(
+            child: Text( "HISTORY",  style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
               ),
+          Expanded(
+            child: StreamBuilder(
+                stream: Firestore.instance.collection('Category').orderBy("Date").snapshots(),
+                builder: (context, snapshot) {
+                  if(!snapshot.hasData ) return const Text("Loading...");
+                  return new ListView.builder(
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          buildExpenseCard(context, snapshot.data.documents[index]));
+                }
             ),
           ),
-        ),
-       //   Expanded(
-      //    child: new ListView.builder(
-      //        itemCount: category.length,
-       //       itemBuilder: (BuildContext context, int index) => buildExpenseCard(context, index)
-      //  ),
-      //    ),
-        Expanded(
-          child: StreamBuilder(
-              stream: Firestore.instance.collection('Category').snapshots(),
-              builder: (context, snapshot) {
-                if(!snapshot.hasData ) return const Text("Loading...");
-                return new ListView.builder(
-                    itemCount: snapshot.data.documents.length,
-                    itemBuilder: (BuildContext context, int index) =>
-                        buildExpenseCard(context, snapshot.data.documents[index]));
-              }
-          ),
-        ),
-
-      ],
+        ],
+      ),
     );
   }
 
@@ -176,7 +143,7 @@ class HistoryPage extends StatelessWidget {
     final category = Category.fromSnapshot(document);
 
 
-    final primaryColor = const Color(0xFFFFECB3);
+    final primaryColor = const Color(0xFFEDE7F6);
 
     return new Container(
       color: primaryColor,

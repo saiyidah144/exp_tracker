@@ -6,7 +6,7 @@ import 'package:exp_tracker/views/profile_view.dart';
 import 'home_view.dart';
 
 
-
+// TO VIEW THE  BOTTOM NAVIGATION AND RANGKA APP
 class Home extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -32,13 +32,6 @@ class _HomeState extends State<Home>{
       appBar: AppBar(
         title: Text("EXPTracker"),
         backgroundColor: primaryColor,
-      //  actions: <Widget>[
-      //    IconButton(icon: Icon(Icons.add),
-
-      //        onPressed: (){
-      //      Navigator.push(context, MaterialPageRoute(builder: (context) => NewExpenseView(expense : newExpense, )),);
-      //        }, ),
-      //  ],
       ),
       body: _children[_currentIndex],
       floatingActionButton: FloatingActionButton (

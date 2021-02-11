@@ -13,7 +13,7 @@ class UserProfile {
  final double shortTarget; //short term target
  final double longTarget; // long term target
  final double netIncome; // net disposable income input
-
+//For USER PROFILE PAGE
   UserProfile({this.id,this.name, this.age, this.gender, this.ethnic, this.phoneNo,
       this.location, this.houseCategory,
       this.shortTarget, this.longTarget, this.netIncome});

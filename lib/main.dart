@@ -5,7 +5,7 @@ import 'services/auth_service.dart';
 import 'models/providerWidget.dart';
 import 'views/navigation_view.dart';
 
-
+//MAIN PAGE
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

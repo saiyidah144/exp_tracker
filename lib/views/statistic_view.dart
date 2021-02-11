@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
+// TO VIEW STATISTIC PAGE
 class StatisticsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

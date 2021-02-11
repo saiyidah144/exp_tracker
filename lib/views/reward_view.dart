@@ -1,14 +1,14 @@
+import 'package:exp_tracker/models/category_data.dart';
 import 'package:flutter/material.dart';
-import 'package:exp_tracker/models/Expense.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-
+// TO VIEW REWARD PAGE
 class RewardView extends StatefulWidget {
-  final Expense expense;
+  final Category category;
 
 
-  const RewardView({Key key, this.expense}) : super(key: key);
+  const RewardView({Key key, this.category}) : super(key: key);
 
   @override
   _RewardViewState createState() => _RewardViewState();
@@ -17,7 +17,7 @@ class RewardView extends StatefulWidget {
 class _RewardViewState extends State<RewardView> {
   final primaryColor = const Color(0xFFCE93D8);
   final db = Firestore.instance;
-  Expense expense;
+  Category category;
   DateTime date1 = DateTime.now();
   DateTime date2 = DateTime(2021,1,30);
   bool _isRewardOn = false;

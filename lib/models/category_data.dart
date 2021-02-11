@@ -9,7 +9,7 @@ class Category {
 
 
   Category({this.budget, this.expenses, this.id,this.date,this.type});
-
+//To save to the DATABASE
   Map<String, dynamic> toMap() {
     return {
       "Budget" : budget,
@@ -19,6 +19,7 @@ class Category {
 
     };
   }
+  // TO GET DATA FROM DATABASE
   Category.fromSnapshot (DocumentSnapshot snapshot):
         budget = snapshot['Budget'],
         date = snapshot['Date'].toDate(),

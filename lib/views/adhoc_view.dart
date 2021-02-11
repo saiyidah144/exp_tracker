@@ -4,7 +4,7 @@ import 'package:exp_tracker/models/category_data.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
-
+//TO VIEW THE ADHOC PAGE TO ADD EXPENSE, BUDGET AND DATE
 class AdHocOneOffRoute extends StatefulWidget {
   final Category adhoc;
 

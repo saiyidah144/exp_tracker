@@ -1,6 +1,7 @@
 import 'package:exp_tracker/models/UserProfile.dart';
 import 'package:exp_tracker/services/firestore_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AddProfileInformation extends StatefulWidget {
   final UserProfile userProfile;
@@ -11,8 +12,10 @@ class AddProfileInformation extends StatefulWidget {
 }
 
 class _AddProfileInformationState extends State<AddProfileInformation> {
+  // Initialize the variable that will be used in this file
   UserProfile userProfile;
   GlobalKey<FormState> _key = GlobalKey<FormState>();
+  // Text controller for all element that needed to be added in USER PROFILE
   TextEditingController _nameController = new TextEditingController();
   TextEditingController _ageController = new TextEditingController();
   TextEditingController _genderController = new TextEditingController();
@@ -23,13 +26,14 @@ class _AddProfileInformationState extends State<AddProfileInformation> {
   TextEditingController _shortController = new TextEditingController();
   TextEditingController _longController = new TextEditingController();
   TextEditingController _incomeController = new TextEditingController();
+  // TO ADD DATA IN THE USERDATA DATABASE
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFEDE7F6),
       appBar: AppBar(
         backgroundColor: Color(0xFF8E24AA),
-        title: const Text('Ad Hoc/One-off', style: TextStyle(fontSize: 30)),
+        title: const Text('Add User Information', style: TextStyle(fontSize: 30)),
       ),
 
       body: SingleChildScrollView(
@@ -40,6 +44,7 @@ class _AddProfileInformationState extends State<AddProfileInformation> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               // Image(image: null,),
+              Text("NOTE : THIS IS FOR FIRST TIME ADDING USER INFORMATION", style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),),
               const SizedBox(height: 50.0),
               TextFormField(
                 textInputAction: TextInputAction.next,
@@ -66,6 +71,10 @@ class _AddProfileInformationState extends State<AddProfileInformation> {
                     return "Age field cannot be empty";
                   return null;
                 },
+                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                inputFormatters: [
+                  WhitelistingTextInputFormatter.digitsOnly,
+                ],
                 decoration: InputDecoration(
                   labelText: "Age",
                   labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
@@ -108,6 +117,10 @@ class _AddProfileInformationState extends State<AddProfileInformation> {
                     return "Phone no field cannot be empty";
                   return null;
                 },
+                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                inputFormatters: [
+                  WhitelistingTextInputFormatter.digitsOnly,
+                ],
                 decoration: InputDecoration(
                   labelText: "Phone No",
                   labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
@@ -150,6 +163,10 @@ class _AddProfileInformationState extends State<AddProfileInformation> {
                     return "Short term goal field cannot be empty";
                   return null;
                 },
+                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                inputFormatters: [
+                  WhitelistingTextInputFormatter.digitsOnly,
+                ],
                 decoration: InputDecoration(
                   labelText: "Short Term Goal",
                   labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
@@ -164,6 +181,10 @@ class _AddProfileInformationState extends State<AddProfileInformation> {
                     return "Long term goal field cannot be empty";
                   return null;
                 },
+                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                inputFormatters: [
+                  WhitelistingTextInputFormatter.digitsOnly,
+                ],
                 decoration: InputDecoration(
                   labelText: "Long Term Goal",
                   labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
@@ -178,6 +199,10 @@ class _AddProfileInformationState extends State<AddProfileInformation> {
                     return "Net Income field cannot be empty";
                   return null;
                 },
+                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                inputFormatters: [
+                  WhitelistingTextInputFormatter.digitsOnly,
+                ],
                 decoration: InputDecoration(
                   labelText: "Net Income",
                   labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
@@ -202,16 +227,15 @@ class _AddProfileInformationState extends State<AddProfileInformation> {
                     try {
                       UserProfile up = UserProfile(
                         name: _nameController.text,
-                      age: int.parse(_ageController.text),
-                      gender: _genderController.text,
-                      ethnic: _ethnicityController.text,
-                      phoneNo: _phoneNoController.text,
-                      location: _locationController.text,
-                      houseCategory: _houseCategoryController.text,
-                      shortTarget: double.parse(_shortController.text),
-                      longTarget: double.parse(_longController.text),
-
-
+                        age: int.parse(_ageController.text),
+                        gender: _genderController.text,
+                        ethnic: _ethnicityController.text,
+                        phoneNo: _phoneNoController.text,
+                        location: _locationController.text,
+                        houseCategory: _houseCategoryController.text,
+                        shortTarget: double.parse(_shortController.text),
+                        longTarget: double.parse(_longController.text),
+                        netIncome: double.parse(_incomeController.text),
                       );
                       await FirestoreService().addProfile(up);
 
