@@ -1,4 +1,4 @@
-# exp_tracker
+# Expense Tracker
 
 A new Flutter application.
 
