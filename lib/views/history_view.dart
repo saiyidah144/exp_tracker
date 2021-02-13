@@ -118,9 +118,7 @@ class HistoryPage extends StatelessWidget {
       color: Colors.deepPurple[50],
       child: Column(
         children: <Widget>[
-          Container(
-            child: Text( "HISTORY",  style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
-              ),
+
           Expanded(
             child: StreamBuilder(
                 stream: Firestore.instance.collection('Category').orderBy("Date").snapshots(),
@@ -138,7 +136,6 @@ class HistoryPage extends StatelessWidget {
     );
   }
 
-
   Widget buildExpenseCard(BuildContext context, DocumentSnapshot document) {
     final category = Category.fromSnapshot(document);
 
@@ -149,6 +146,9 @@ class HistoryPage extends StatelessWidget {
       color: primaryColor,
       child: Column(
         children: <Widget>[
+          Container(
+              child: Text(DateFormat('MMMM yyyy').format(category.date).toString(), style: new TextStyle(fontSize: 25),)
+          ),
           Card(
               child: Padding(
                 padding: const EdgeInsets.all(12),
