@@ -134,6 +134,7 @@ class _TransportRouteState extends State< TransportRoute> {
                       await FirestoreService().addData(transport);
 
                       Navigator.pop(context);
+                      showAlertDialog(context);
                     } catch (e) {
                       print(e);
                     }
@@ -144,6 +145,23 @@ class _TransportRouteState extends State< TransportRoute> {
           ),
         ),
       ),
+    );
+  }
+  showAlertDialog (BuildContext context){
+    // set up the buttons
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(" SUCCESSFUL! ", style: TextStyle(fontSize: 25, ), textAlign: TextAlign.center,),
+      content: Text("The Expense, Budget for the day has been successfully added to the database"),
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
