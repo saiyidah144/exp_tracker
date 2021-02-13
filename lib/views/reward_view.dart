@@ -166,7 +166,7 @@ class _RewardViewState extends State<RewardView> {
 
                     onTap: () async {
                       final category = Firestore.instance.collection('Category').reference();
-                     
+
                       setState(() {
                         //     while ( date1.day != 15 ) {
                         if (  category != null ) {
