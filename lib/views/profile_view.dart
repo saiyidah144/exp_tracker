@@ -1,4 +1,3 @@
-import 'package:exp_tracker/models/UserProfile.dart';
 import 'package:exp_tracker/views/add_profile.dart';
 import 'package:exp_tracker/views/detailed_profile_view.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +11,6 @@ class AccountPage extends StatefulWidget{
 }
 
 class _AccountPageState extends State<AccountPage> {
-  UserProfile userProfile;
-
 
   @override
   Widget build(BuildContext context) {

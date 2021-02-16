@@ -3,21 +3,31 @@ import 'package:exp_tracker/models/UserProfile.dart';
 import 'package:exp_tracker/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 // TO VIEW DETAILED USER PROFILE AND UPDATE THE DATA IN USER PROFILE
 // ignore: must_be_immutable
-class DetailedProfileView extends StatelessWidget {
-  UserProfile userProfile;
+
+// ignore: must_be_immutable
+class DetailedProfileView extends StatefulWidget {
+
+  @override
+  _DetailedProfileViewState createState() => _DetailedProfileViewState();
+}
+
+class _DetailedProfileViewState extends State<DetailedProfileView> {
+  // UserProfile userProfile;
   GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController _nameController = new TextEditingController();
   TextEditingController _ageController = new TextEditingController();
-  TextEditingController _genderController = new TextEditingController();
-  TextEditingController _ethnicityController = new TextEditingController();
   TextEditingController _phoneNoController = new TextEditingController();
   TextEditingController _locationController = new TextEditingController();
-  TextEditingController _houseCategoryController = new TextEditingController();
   TextEditingController _shortController = new TextEditingController();
   TextEditingController _longController = new TextEditingController();
   TextEditingController _incomeController = new TextEditingController();
+  String _gender ;
+  String _ethnicity;
+  String _houseCategory;
+
   final primaryColor = const Color(0xFFCE93D8);
 
   @override
@@ -63,7 +73,7 @@ class DetailedProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Text("Name : ", style: new TextStyle(fontSize: 25.0),),
+                Text("Name : ", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
                 Spacer(),
                 Text(userProfile.name,  style: new TextStyle(fontSize: 25.0),),
               ],
@@ -73,9 +83,9 @@ class DetailedProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Text("Age : ", style: new TextStyle(fontSize: 25.0),),
+                Text("Age : ", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
                 Spacer(),
-                Text(userProfile.age.toString(), style: new TextStyle(fontSize: 25.0),),
+                Text(userProfile.age.toString() + " years old", style: new TextStyle(fontSize: 25.0),),
               ],
             ),
           ),
@@ -83,9 +93,9 @@ class DetailedProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Text("Gender : ", style: new TextStyle(fontSize: 25.0),),
+                Text("Gender : ", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
                 Spacer(),
-                Text(userProfile.gender, style: new TextStyle(fontSize: 25.0),),
+                Text(userProfile.gender , style: new TextStyle(fontSize: 25.0),),
               ],
             ),
           ),
@@ -93,7 +103,7 @@ class DetailedProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Text("Ethnicity : ", style: new TextStyle(fontSize: 25.0),),
+                Text("Ethnicity : ", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
                 Spacer(),
                 Text(userProfile.ethnic.toString(), style: new TextStyle(fontSize: 25.0),),
               ],
@@ -103,7 +113,7 @@ class DetailedProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Text("Phone No : ", style: new TextStyle(fontSize: 25.0),),
+                Text("Phone No : ", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
                 Spacer(),
                 Text(userProfile.phoneNo, style: new TextStyle(fontSize: 25.0),),
               ],
@@ -113,7 +123,7 @@ class DetailedProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Text("House Location : ", style: new TextStyle(fontSize: 25.0),),
+                Text("House Location : ", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
                 Spacer(),
                 Text(userProfile.location, style: new TextStyle(fontSize: 25.0),),
               ],
@@ -123,9 +133,7 @@ class DetailedProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Text("Household Category : ", style: new TextStyle(fontSize: 25.0),),
-                Spacer(),
-                Text(userProfile.houseCategory, style: new TextStyle(fontSize: 25.0),),
+                Text("Household Category : ", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
               ],
             ),
           ),
@@ -133,9 +141,7 @@ class DetailedProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                  Text("Short Term Goal : ", style: new TextStyle(fontSize: 25.0),),
-                Spacer(),
-                Text(userProfile.shortTarget.toString(), style: new TextStyle(fontSize: 25.0),),
+                Text(userProfile.houseCategory, style: new TextStyle(fontSize: 23.0),),
               ],
             ),
           ),
@@ -143,9 +149,7 @@ class DetailedProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Text("Long Term Goal : ", style: new TextStyle(fontSize: 25.0),),
-                Spacer(),
-                Text(userProfile.longTarget.toString(), style: new TextStyle(fontSize: 25.0),),
+                  Text("Short Term Goal : ", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
               ],
             ),
           ),
@@ -153,10 +157,39 @@ class DetailedProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Text("Net Income : ", style: new TextStyle(fontSize: 25.0),),
-                Spacer(),
-                Text(userProfile.netIncome.toString(), style: new TextStyle(fontSize: 25.0),),
-
+                Text("RM "+userProfile.shortTarget.toStringAsFixed(2), style: new TextStyle(fontSize: 25.0),textAlign: TextAlign.center,),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                Text("Long Term Goal : ", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                Text("RM "+userProfile.longTarget.toStringAsFixed(2), style: new TextStyle(fontSize: 25.0),textAlign: TextAlign.center,),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                Text("Net Income : ", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                Text("RM "+userProfile.netIncome.toStringAsFixed(2), style: new TextStyle(fontSize: 25.0), textAlign: TextAlign.center,),
               ],
             ),
           ),
@@ -182,8 +215,13 @@ class DetailedProfileView extends StatelessWidget {
       ),
     );
   }
+
   updateProfileInformation(BuildContext context, DocumentSnapshot snapshot){
     final userProfile = UserProfile.fromSnapshot(snapshot);
+    _gender = "Female";
+    _ethnicity ="Malay";
+    _houseCategory= "Single (Public Transport User)";
+
    return showDialog(context: context, builder:(context) {
      return AlertDialog(
        title: Text("Update User Information"),
@@ -235,32 +273,94 @@ class DetailedProfileView extends StatelessWidget {
                    ),
                  ),
                  const SizedBox(height: 30.0),
-                 TextFormField(
-                   controller: _genderController,
-                   validator: (value) {
-                     if (value == null || value.isEmpty)
-                       return "Gender field cannot be empty";
-                     return null;
+                 // TextFormField(
+                 //   controller: _genderController,
+                 //   validator: (value) {
+                 //     if (value == null || value.isEmpty)
+                 //       return "Gender field cannot be empty";
+                 //     return null;
+                 //   },
+                 //   decoration: InputDecoration(
+                 //     labelText: "Gender",
+                 //     labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
+                 //     border: OutlineInputBorder(),
+                 //   ),
+                 // ),
+                 Text("Gender"),
+                 RadioListTile(
+                   title: const Text("Female"),
+                   value: "Female",
+                   groupValue: _gender,
+                   onChanged: (value){
+                     setState(() {
+                       _gender = value;
+                     });
                    },
-                   decoration: InputDecoration(
-                     labelText: "Gender",
-                     labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
-                     border: OutlineInputBorder(),
-                   ),
+                 ),
+                 RadioListTile(
+                   title: const Text("Male"),
+                   value: "Male",
+                   groupValue: _gender,
+                   onChanged: (value){
+                     setState(() {
+                       _gender = value;
+                     });
+                   },
                  ),
                  const SizedBox(height: 30.0),
-                 TextFormField(
-                   controller: _ethnicityController,
-                   validator: (value) {
-                     if (value == null || value.isEmpty)
-                       return "Ethnicity field cannot be empty";
-                     return null;
+                 // TextFormField(
+                 //   controller: _ethnicityController,
+                 //   validator: (value) {
+                 //     if (value == null || value.isEmpty)
+                 //       return "Ethnicity field cannot be empty";
+                 //     return null;
+                 //   },
+                 //   decoration: InputDecoration(
+                 //     labelText: "Ethnicity",
+                 //     labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
+                 //     border: OutlineInputBorder(),
+                 //   ),
+                 // ),
+                 Text("Ethnicity"),
+                 RadioListTile(
+                   title: const Text("Malay"),
+                   value: "Malay",
+                   groupValue: _ethnicity,
+                   onChanged: (value){
+                     setState(() {
+                       _ethnicity = value;
+                     });
                    },
-                   decoration: InputDecoration(
-                     labelText: "Ethnicity",
-                     labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
-                     border: OutlineInputBorder(),
-                   ),
+                 ),
+                 RadioListTile(
+                   title: const Text("Chinese"),
+                   value: "Chinese",
+                   groupValue: _ethnicity,
+                   onChanged: (value){
+                     setState(() {
+                       _ethnicity = value;
+                     });
+                   },
+                 ),
+                 RadioListTile(
+                   title: const Text("Indian"),
+                   value: "Indian",
+                   groupValue: _ethnicity,
+                   onChanged: (value){
+                     setState(() {
+                       _ethnicity = value;
+                     });
+                   },
+                 ),
+                 RadioListTile(
+                   title: const Text("Others"),
+                   value: "Others",
+                   groupValue: _ethnicity,
+                   onChanged: (value){
+                     setState(() {
+                       _ethnicity = value;
+                     });
+                   },
                  ),
                  const SizedBox(height: 30.0),
                  TextFormField(
@@ -295,18 +395,79 @@ class DetailedProfileView extends StatelessWidget {
                    ),
                  ),
                  const SizedBox(height: 30.0),
-                 TextFormField(
-                   controller: _houseCategoryController,
-                   validator: (value) {
-                     if (value == null || value.isEmpty)
-                       return "House Category field cannot be empty";
-                     return null;
+                 // TextFormField(
+                 //   controller: _houseCategoryController,
+                 //   validator: (value) {
+                 //     if (value == null || value.isEmpty)
+                 //       return "House Category field cannot be empty";
+                 //     return null;
+                 //   },
+                 //   decoration: InputDecoration(
+                 //     labelText: "House Category",
+                 //     labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
+                 //     border: OutlineInputBorder(),
+                 //   ),
+                 // ),
+                 Text("Household Category"),
+                 RadioListTile(
+                   title: const Text("Single (Public Transport User)"),
+                   value: "Single (Public Transport User)",
+                   groupValue: _houseCategory,
+                   onChanged: (value){
+                     setState(() {
+                       _houseCategory = value;
+                     });
                    },
-                   decoration: InputDecoration(
-                     labelText: "House Category",
-                     labelStyle: TextStyle(color: Colors.black, fontSize:20.0),
-                     border: OutlineInputBorder(),
-                   ),
+                 ),
+                 RadioListTile(
+                   title: const Text("Single (Car Owner)"),
+                   value: "Single (Car Owner)",
+                   groupValue: _houseCategory,
+                   onChanged: (value){
+                     setState(() {
+                       _houseCategory = value;
+                     });
+                   },
+                 ),
+                 RadioListTile(
+                   title: const Text("Married Couple (W/O children)"),
+                   value: "Married Couple (without children)",
+                   groupValue: _houseCategory,
+                   onChanged: (value){
+                     setState(() {
+                       _houseCategory = value;
+                     });
+                   },
+                 ),
+                 RadioListTile(
+                   title: const Text("Married Couple (with 1 child)"),
+                   value: "Married Couple (with 1 child)",
+                   groupValue: _houseCategory,
+                   onChanged: (value){
+                     setState(() {
+                       _houseCategory = value;
+                     });
+                   },
+                 ),
+                 RadioListTile(
+                   title: const Text("Married Couple (with 2 child)"),
+                   value: "Married Couple (with 2 child)",
+                   groupValue: _houseCategory,
+                   onChanged: (value){
+                     setState(() {
+                       _houseCategory = value;
+                     });
+                   },
+                 ),
+                 RadioListTile(
+                   title: const Text("Elderly Couple"),
+                   value: "Elderly Couple",
+                   groupValue: _houseCategory,
+                   onChanged: (value){
+                     setState(() {
+                       _houseCategory = value;
+                     });
+                   },
                  ),
                  const SizedBox(height: 30.0),
                  TextFormField(
@@ -381,11 +542,11 @@ class DetailedProfileView extends StatelessWidget {
                          UserProfile up = UserProfile(
                            name: _nameController.text,
                            age: int.parse(_ageController.text),
-                           gender: _genderController.text,
-                           ethnic: _ethnicityController.text,
+                           gender: _gender,
+                           ethnic: _ethnicity,
                            phoneNo: _phoneNoController.text,
                            location: _locationController.text,
-                           houseCategory: _houseCategoryController.text,
+                           houseCategory: _houseCategory,
                            shortTarget: double.parse(_shortController.text),
                            longTarget: double.parse(_longController.text),
                            netIncome: double.parse(_incomeController.text),
@@ -410,3 +571,5 @@ class DetailedProfileView extends StatelessWidget {
    );
   }
 }
+
+

@@ -1,14 +1,15 @@
 import 'package:exp_tracker/models/category_data.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exp_tracker/models/Reward.dart';
 
 
 // TO VIEW REWARD PAGE
 class RewardView extends StatefulWidget {
   final Category category;
+ final Reward reward;
 
-
-  const RewardView({Key key, this.category}) : super(key: key);
+  const RewardView({Key key, this.category, this.reward}) : super(key: key);
 
   @override
   _RewardViewState createState() => _RewardViewState();
@@ -17,9 +18,14 @@ class RewardView extends StatefulWidget {
 class _RewardViewState extends State<RewardView> {
   final primaryColor = const Color(0xFFCE93D8);
   final db = Firestore.instance;
+  Reward reward;
   Category category;
   DateTime date1 = DateTime.now();
   DateTime date2 = DateTime(2021,1,30);
+  DateTime date3 = DateTime(2021,2,30);
+  DateTime date4 = DateTime(2021,3,30);
+  DateTime date5 = DateTime(2021,4,30);
+  DateTime date6 = DateTime(2021,5,30);
   bool _isRewardOn1 = false;
   bool _isRewardOn2 = false;
   bool _isRewardOn3 = false;
@@ -116,15 +122,11 @@ class _RewardViewState extends State<RewardView> {
                       onTap: () async {
                             final category = Firestore.instance.collection('Category').reference();
                           setState(() {
-                       //     while ( date1.day != 15 ) {
-                              if (  category != null ) {
+                              if (  category != null) {
                                 _isRewardOn1 = !_isRewardOn1;
-                                showAlertDialog(context);
+                                _isRewardOn2 = !_isRewardOn2;
                               }
-                       //     }
-
-
-                            }
+                             }
                             );
                       },
                 ),
@@ -165,15 +167,42 @@ class _RewardViewState extends State<RewardView> {
                     ),
 
                     onTap: () async {
-                      final category = Firestore.instance.collection('Category').reference();
+                      final category = Firestore.instance.collection('Category').where('date').reference();
 
                       setState(() {
-                        //     while ( date1.day != 15 ) {
+                        while ( date1.day != 15 ) {
+                          int lock;
                         if (  category != null ) {
-                          _isRewardOn1 = !_isRewardOn1;
-                          showAlertDialog(context);
+                          // ignore: unrelated_type_equality_checks
+                          if (category == date2.month){
+                            _isRewardOn6 = !_isRewardOn6;
+                             lock =1;
+                             // ignore: unrelated_type_equality_checks
+                             if (category == date3.month){
+                               _isRewardOn7 = !_isRewardOn7;
+                               lock =2;
+                               // ignore: unrelated_type_equality_checks
+                               if (category == date4.month){
+                                 _isRewardOn8 = !_isRewardOn8;
+                                 lock =3;
+                                 // ignore: unrelated_type_equality_checks
+                                 if (category == date5.month){
+                                   _isRewardOn9 = !_isRewardOn9;
+                                   lock =4;
+                                   // ignore: unrelated_type_equality_checks
+                                   if (category == date6.month){
+                                     _isRewardOn10 = !_isRewardOn10;
+                                     lock = 5;
+                                     if (lock==5){
+                                       showAlertDialog(context);
+                                     }
+                                   }
+                                 }
+                               }
+                             }
+                          }
                         }
-                        //     }
+                             }
 
 
                       }
@@ -189,6 +218,7 @@ class _RewardViewState extends State<RewardView> {
 
   }
 showAlertDialog (BuildContext context){
+
   // set up the buttons
 
   Widget closeButton = FlatButton(
@@ -201,7 +231,7 @@ showAlertDialog (BuildContext context){
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     title: Text("AlertDialog"),
-    content: Text("Your code is ajsadhsd"),
+    content: Text("Your code is 8UT5iHY" ),
     actions: [
       closeButton,
     ],
@@ -215,6 +245,7 @@ showAlertDialog (BuildContext context){
     },
   );
 }
+
 
 
 }
